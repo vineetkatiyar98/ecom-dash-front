@@ -17,7 +17,7 @@ const Signup = ()=>{
        
         console.log(name,email,passwaord)
         let data = {name,email,passwaord}
-       fetch('http://localhost:5000/register',{
+       fetch('https://backend-ykss.onrender.com/register',{
             method:'post',
             headers: {
                 'Content-Type' :'application/json'
