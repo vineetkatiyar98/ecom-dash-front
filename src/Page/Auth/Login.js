@@ -27,8 +27,7 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = async () => {
     let result = await fetch(`https://ecom-dash-backend-folq.onrender.com/login`, {
       method: "POST",
       body: JSON.stringify({ email, password }),
