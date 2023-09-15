@@ -7,8 +7,7 @@ import sign from "../../Assets/Images/sign.png";
 import { useEffect, useState } from "react";
 
 const Signup = () => {
-  const [fName, setFName] = useState();
-  const [lName, setLName] = useState();
+  const [name, setFName] = useState();
   const [phone, setPhone] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -22,10 +21,10 @@ const Signup = () => {
   }, []);
 
   const signupSubmit = async () => {
-    console.log(fName, lName, phone, email, password);
+    console.log(name, phone, email, password);
     let result = await fetch(`http://localhost:8000/register`, {
       method: "POST",
-      body: JSON.stringify({ fName, lName, phone, email, password }),
+      body: JSON.stringify({ name, phone, email, password }),
       headers: { "Content-Type": "application/json" },
     });
     result = await result.json();
@@ -35,12 +34,10 @@ const Signup = () => {
   };
 
   const schema = yup.object().shape({
-    fName: yup.string().required(),
-    lName: yup.string().required(),
+    name: yup.string().required(),
     phone: yup.number().positive().integer().min(10).required(),
     email: yup.string().email().required(),
     password: yup.string().min(8).max(12).required(),
-    cPassword: yup.string().oneOf([yup.ref("password"), null]),
   });
 
   const {
@@ -59,32 +56,18 @@ const Signup = () => {
 
           <div className="form-group-row">
             <div className="formgroup">
-              <label htmlFor="fname">Full Name</label>
+              <label htmlFor="name">Full Name</label>
               <input
                 type="text"
-                id="fname"
-                value={fName}
+                id="name"
+                value={name}
                 onChange={(e) => {
                   setFName(e.target.value);
                 }}
-                {...register("fName")}
+                {...register("name")}
                 autoComplete="username"
               />
-              <span>{errors.fullName?.message}</span>
-            </div>
-            <div className="formgroup">
-              <label htmlFor="lname">Full Name</label>
-              <input
-                type="text"
-                id="lname"
-                value={lName}
-                onChange={(e) => {
-                  setLName(e.target.value);
-                }}
-                {...register("lName")}
-                autoComplete="username"
-              />
-              <span>{errors.fullName?.message}</span>
+              <span>{errors.name?.message}</span>
             </div>
           </div>
 
@@ -130,20 +113,6 @@ const Signup = () => {
                 autocomplete="current-password"
               />
               <span>{errors.password?.message}</span>
-            </div>
-            <div className="formgroup">
-              <label htmlFor="cpassword">Password</label>
-              <input
-                type="password"
-                id="cpassword"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                {...register("cPassword")}
-                autocomplete="current-password"
-              />
-              <span>{errors.cPassword?.message}</span>
             </div>
           </div>
           <p
