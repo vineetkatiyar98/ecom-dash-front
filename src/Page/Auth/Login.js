@@ -29,7 +29,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    let result = await fetch(`http://localhost:8000/login`, {
+    let result = await fetch(`https://ecom-dash-backend-folq.onrender.com/login`, {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
