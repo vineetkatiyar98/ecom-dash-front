@@ -22,7 +22,7 @@ const Signup = () => {
 
   const signupSubmit = async () => {
     console.log(name, phone, email, password);
-    let result = await fetch(`https://ecom-dash-backend-folq.onrender.com/register`, {
+    let result = await fetch(`https://mern-dashboard-backend.cyclic.cloud/register`, {
       method: "POST",
       body: JSON.stringify({ name, phone, email, password }),
       headers: { "Content-Type": "application/json" },

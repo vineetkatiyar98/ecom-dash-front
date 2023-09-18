@@ -28,7 +28,7 @@ const Login = () => {
   });
 
   const handleLogin = async () => {
-    let result = await fetch(`https://ecom-dash-backend-folq.onrender.com/login`, {
+    let result = await fetch(`https://mern-dashboard-backend.cyclic.cloud/login`, {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
