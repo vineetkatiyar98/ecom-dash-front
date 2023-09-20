@@ -2,7 +2,7 @@ import React, { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 import sign from "../../Assets/Images/sign.png";
 
@@ -11,24 +11,28 @@ const Login = () => {
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    const auth = localStorage.getItem("user")
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
     if (auth) {
-      navigate("/")
+      navigate("/");
     }
-  })
+  });
 
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().min(8).max(12).required(),
   });
 
-  const { register, handleSubmit , formState : {errors}} = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
   const handleLogin = async () => {
-    let result = await fetch(`https://mern-dashboard-backend.cyclic.cloud/login`, {
+    let result = await fetch(`http://localhost:8000/login`, {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
@@ -56,11 +60,12 @@ const Login = () => {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-              }} {...register("email")}password
+              }}
+              {...register("email")}
+              password
               autocomplete="email"
             />
-                      <span>{errors.email?.message}</span>  
-
+            <span>{errors.email?.message}</span>
           </div>
           <div className="formgroup">
             <label htmlFor="password">Password</label>
@@ -70,10 +75,11 @@ const Login = () => {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-              }} {...register("password")}
+              }}
+              {...register("password")}
               autocomplete="current-password"
             />
-            <span>{errors.password?.message}</span>  
+            <span>{errors.password?.message}</span>
           </div>
           <input className="submit" value="Login" type="submit" />
         </form>

@@ -15,7 +15,7 @@ const AddProduct = () => {
     e.preventDefault();
     console.log(name,price,category,company)
     const userId = JSON.parse(localStorage.getItem("user"))._id;
-    let result = await fetch("https://mern-dashboard-backend.cyclic.cloud/add-product", {
+    let result = await fetch("http://localhost:8000/add-product", {
       method: "post",
       body: JSON.stringify({ name, price, category, company, userId }),
       headers: {

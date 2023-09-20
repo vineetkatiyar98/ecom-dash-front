@@ -22,7 +22,7 @@ const Signup = () => {
 
   const signupSubmit = async () => {
     console.log(name, phone, email, password);
-    let result = await fetch(`https://mern-dashboard-backend.cyclic.cloud/register`, {
+    let result = await fetch(`http://localhost:8000/register`, {
       method: "POST",
       body: JSON.stringify({ name, phone, email, password }),
       headers: { "Content-Type": "application/json" },

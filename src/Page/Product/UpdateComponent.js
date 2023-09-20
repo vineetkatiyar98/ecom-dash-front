@@ -16,7 +16,7 @@ const UpdateComponent = () => {
 
   const getProductDetails = async () => {
     console.log(params);
-    let result = await fetch(`https://mern-dashboard-backend.cyclic.cloud/product/${params.id}`);
+    let result = await fetch(`http://localhost:8000/product/${params.id}`);
     result = await result.json();
     setName(result.name);
     setPrice(result.price);
@@ -28,7 +28,7 @@ const UpdateComponent = () => {
     e.preventDefault();
     console.warn(name, price, category, company);
     let result = await fetch(
-      `https://mern-dashboard-backend.cyclic.cloud/${params.id}`,
+      `http://localhost:8000/${params.id}`,
       {
         method: "Put",
         body: JSON.stringify({ name, price, category, company }),
